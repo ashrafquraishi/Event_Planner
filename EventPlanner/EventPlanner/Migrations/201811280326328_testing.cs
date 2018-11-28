@@ -3,7 +3,7 @@ namespace EventPlanner.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Updatemodel : DbMigration
+    public partial class testing : DbMigration
     {
         public override void Up()
         {

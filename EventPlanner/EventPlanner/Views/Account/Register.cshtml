@@ -1,5 +1,7 @@
 ﻿@model EventPlanner.Models.RegisterViewModel
 @{
+    /**/
+
     ViewBag.Title = "Register";
 }
 
@@ -23,10 +25,18 @@
             @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
         </div>
     </div>
+
     <div class="form-group">
         @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserRole, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.RadioButtonFor(m => m.UserRole, "UserModel", new { @class = "radio-inline" }) @Html.Label("User")
+            @Html.RadioButtonFor(m => m.UserRole, "EventOwnerModel", new { @class = "radio-inline" }) @Html.Label("Event Owner")
         </div>
     </div>
     <div class="form-group">

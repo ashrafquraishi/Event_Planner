@@ -7,13 +7,13 @@ namespace EventPlanner.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class madechange : IMigrationMetadata
+    public sealed partial class testing : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(madechange));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(testing));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811151737598_made change"; }
+            get { return "201811280326328_testing"; }
         }
         
         string IMigrationMetadata.Source

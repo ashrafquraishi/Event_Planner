@@ -1,0 +1,92 @@
+﻿@model IEnumerable<EventPlanner.Models.MenuItem>
+
+
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CateringCompany)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItemTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItemDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuitemNutrition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItemIngredients)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItemQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MenuItemCost)
+        </th>
+        
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem =>item.CateringCompany)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuItemTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuItemDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuitemNutrition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuItemIngredients)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuItemQuantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MenuItemCost)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MenuItemID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MenuItemID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MenuItemID })
+                </td>*@
+        </tr>
+    }
+
+</table>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EnterDishes)
+
+        </th>
+       
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.EnterDishes)
+            </td>
+            <td>
+               
+               
+                @Html.ActionLink("Enter", "MenuItems", "Create", new { id = item.MenuItemID })
+
+            </td>
+        </tr>
+    }
+
+</table>

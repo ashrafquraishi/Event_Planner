@@ -7,13 +7,13 @@ namespace EventPlanner.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UserModl : IMigrationMetadata
+    public sealed partial class updatedMenu : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserModl));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatedMenu));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811201607398_UserModl"; }
+            get { return "201811280458107_updated Menu"; }
         }
         
         string IMigrationMetadata.Source

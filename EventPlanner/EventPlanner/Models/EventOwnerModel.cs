@@ -28,7 +28,9 @@ namespace EventPlanner.Models.EventPlannerModels
         [ForeignKey("EventLocationModelId")]
         public virtual EventLocationModel EventLocationModel { get; set; }
 
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
-       
     }
 }

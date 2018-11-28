@@ -7,128 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EventPlanner.Models;
-using EventPlanner.Models.EventPlannerModels;
 
-namespace EventPlanner.Controllers.EventPlannerController
+namespace EventPlanner.Controllers
 {
-    public class EventLocationModelsController : Controller
+    public class MenuItemsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: EventLocationModels
+        // GET: MenuItems
         public ActionResult Index()
         {
-            return View(db.EventLocationModels.ToList());
-        }
-        //[HttpPost]
-        //public ActionResult Index(string SearchResult)
-
-        //{
-        //    var ZipCodeSearch = from m in db.EventLocationModels
-        //                        select m;
-        //    if (!string.IsNullOrEmpty(SearchResult))
-        //    {
-        //        ZipCodeSearch = ZipCodeSearch.Where(s => s.ZipCode.ToString().Contains(SearchResult));
-        //    }
-
-        //    return View(ZipCodeSearch);
-        //}
-        public ActionResult Chat()
-        {
-            return View();
+            return View(db.MenuItems.ToList());
         }
 
-        // GET: EventLocationModels/Details/5
+        // GET: MenuItems/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EventLocationModel eventLocationModel = db.EventLocationModels.Find(id);
-            if (eventLocationModel == null)
+            MenuItem menuItem = db.MenuItems.Find(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return View(eventLocationModel);
+            return View(menuItem);
         }
 
-        // GET: EventLocationModels/Create
+        // GET: MenuItems/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: EventLocationModels/Create
+        // POST: MenuItems/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,VenueName,Address,ZipCode,City,State,Capacity,Price")] EventLocationModel eventLocationModel)
+        public ActionResult Create([Bind(Include = "CateringCompany,EnterDishes,MenuItemID,MenuItemTitle,MenuItemDescription,MenuitemNutrition,MenuItemIngredients,MenuItemQuantity,MenuItemCost")] MenuItem menuItem)
         {
             if (ModelState.IsValid)
             {
-                db.EventLocationModels.Add(eventLocationModel);
+                db.MenuItems.Add(menuItem);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(eventLocationModel);
+            return View(menuItem);
         }
 
-        // GET: EventLocationModels/Edit/5
+        // GET: MenuItems/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EventLocationModel eventLocationModel = db.EventLocationModels.Find(id);
-            if (eventLocationModel == null)
+            MenuItem menuItem = db.MenuItems.Find(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return View(eventLocationModel);
+            return View(menuItem);
         }
 
-        // POST: EventLocationModels/Edit/5
+        // POST: MenuItems/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,VenueName,Address,ZipCode,City,State,Capacity,Price")] EventLocationModel eventLocationModel)
+        public ActionResult Edit([Bind(Include = "MenuItemID,MenuItemTitle,MenuItemDescription,MenuitemNutrition,MenuItemIngredients,MenuItemQuantity,MenuItemCost")] MenuItem menuItem)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(eventLocationModel).State = EntityState.Modified;
+                db.Entry(menuItem).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(eventLocationModel);
+            return View(menuItem);
         }
 
-        // GET: EventLocationModels/Delete/5
+        // GET: MenuItems/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EventLocationModel eventLocationModel = db.EventLocationModels.Find(id);
-            if (eventLocationModel == null)
+            MenuItem menuItem = db.MenuItems.Find(id);
+            if (menuItem == null)
             {
                 return HttpNotFound();
             }
-            return View(eventLocationModel);
+            return View(menuItem);
         }
 
-        // POST: EventLocationModels/Delete/5
+        // POST: MenuItems/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EventLocationModel eventLocationModel = db.EventLocationModels.Find(id);
-            db.EventLocationModels.Remove(eventLocationModel);
+            MenuItem menuItem = db.MenuItems.Find(id);
+            db.MenuItems.Remove(menuItem);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

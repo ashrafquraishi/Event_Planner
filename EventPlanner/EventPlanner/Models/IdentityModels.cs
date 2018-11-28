@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -35,5 +36,7 @@ namespace EventPlanner.Models
         public System.Data.Entity.DbSet<EventPlanner.Models.EventPlannerModels.EventLocationModel> EventLocationModels { get; set; }
 
         public System.Data.Entity.DbSet<EventPlanner.Models.UserModel> UserModels { get; set; }
+
+        public System.Data.Entity.DbSet<EventPlanner.Models.MenuItem> MenuItems { get; set; }
     }
 }
