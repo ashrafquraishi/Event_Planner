@@ -55,20 +55,17 @@ namespace EventPlanner.Controllers
         }
 
         // GET: User
-        public ActionResult Details(int? id)
+        public ActionResult Details(int Id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            UserModel userModel = db.UserModels.Find(id);
-            if (userModel == null)
-            {
-                return HttpNotFound();
-            }
-            return View(userModel);
+            var ShowDetails = db.UserModels.Where(s => s.Id == Id).First();
+            return View(ShowDetails);
         }
-
+        [HttpPost]
+        public ActionResult Details(int Id, UserModel showdetails)
+        {
+            UserModel showdetails1 = db.UserModels.Where(s => s.Id == showdetails.Id).First();
+            return RedirectToAction("Index");
+        }
         // GET: User/Create
         public ActionResult Create()
         {
@@ -88,7 +85,7 @@ namespace EventPlanner.Controllers
                 userModel.ApplicationUserId = userId;
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
 
             return View(userModel);

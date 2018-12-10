@@ -13,7 +13,7 @@ namespace EventPlanner
         {
             app.MapSignalR();
             CreateRolls();
-
+            ConfigureAuth(app);
         }
         private void CreateRolls()
         {

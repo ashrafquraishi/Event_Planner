@@ -281,7 +281,7 @@ namespace EventPlanner.Controllers
         [AllowAnonymous]
         public ActionResult ResetPasswordConfirmation()
         {
-            return View();
+            return View();  
         }
 
         //
