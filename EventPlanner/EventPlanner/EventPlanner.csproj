@@ -212,11 +212,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\EventLocationModelsController.cs" />
-    <Compile Include="Controllers\EventOwnerModelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MainsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\MenuItemsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -237,12 +235,14 @@
     <Compile Include="Migrations\201811280458107_updated Menu.Designer.cs">
       <DependentUpon>201811280458107_updated Menu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901150117431_Made a single Model.cs" />
+    <Compile Include="Migrations\201901150117431_Made a single Model.Designer.cs">
+      <DependentUpon>201901150117431_Made a single Model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\MenuItem.cs" />
+    <Compile Include="Models\Main.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="Models\EventLocationModel.cs" />
-    <Compile Include="Models\EventOwnerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -348,6 +348,11 @@
     <Content Include="Views\MenuItems\Edit.cshtml" />
     <Content Include="Views\MenuItems\Index.cshtml" />
     <Content Include="Views\User\OrderFood.cshtml" />
+    <Content Include="Views\Mains\Create.cshtml" />
+    <Content Include="Views\Mains\Delete.cshtml" />
+    <Content Include="Views\Mains\Details.cshtml" />
+    <Content Include="Views\Mains\Edit.cshtml" />
+    <Content Include="Views\Mains\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -374,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811280458107_updated Menu.resx">
       <DependentUpon>201811280458107_updated Menu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901150117431_Made a single Model.resx">
+      <DependentUpon>201901150117431_Made a single Model.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

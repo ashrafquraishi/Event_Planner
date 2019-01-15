@@ -10,107 +10,112 @@ using EventPlanner.Models;
 
 namespace EventPlanner.Controllers
 {
-    public class MenuItemsController : Controller
+    public class MainsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: MenuItems
+        // GET: Mains
         public ActionResult Index()
         {
-            return View(db.MenuItems.ToList());
+            var mains = db.Mains.Include(m => m.ApplicationUser);
+            return View(mains.ToList());
         }
 
-        // GET: MenuItems/Details/5
+        // GET: Mains/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MenuItem menuItem = db.MenuItems.Find(id);
-            if (menuItem == null)
+            Main main = db.Mains.Find(id);
+            if (main == null)
             {
                 return HttpNotFound();
             }
-            return View(menuItem);
+            return View(main);
         }
 
-        // GET: MenuItems/Create
+        // GET: Mains/Create
         public ActionResult Create()
         {
+            ViewBag.ApplicationUserId = new SelectList(db.ApplicationUsers, "Id", "Email");
             return View();
         }
 
-        // POST: MenuItems/Create
+        // POST: Mains/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CateringCompany,EnterDishes,MenuItemID,MenuItemTitle,MenuItemDescription,MenuitemNutrition,MenuItemIngredients,MenuItemQuantity,MenuItemCost")] MenuItem menuItem)
+        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,Email,Address,VenueName,ZipCode,City,State,Capacity,Price,CateringCompany,MenuItemTitle,MenuItemDescription,MenuItemQuantity,MenuItemCost,EnterDishes,SecurityName,SecurityPersonal,perSecurityPersonal,ApplicationUserId")] Main main)
         {
             if (ModelState.IsValid)
             {
-                db.MenuItems.Add(menuItem);
+                db.Mains.Add(main);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(menuItem);
+            ViewBag.ApplicationUserId = new SelectList(db.ApplicationUsers, "Id", "Email", main.ApplicationUserId);
+            return View(main);
         }
 
-        // GET: MenuItems/Edit/5
+        // GET: Mains/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MenuItem menuItem = db.MenuItems.Find(id);
-            if (menuItem == null)
+            Main main = db.Mains.Find(id);
+            if (main == null)
             {
                 return HttpNotFound();
             }
-            return View(menuItem);
+            ViewBag.ApplicationUserId = new SelectList(db.ApplicationUsers, "Id", "Email", main.ApplicationUserId);
+            return View(main);
         }
 
-        // POST: MenuItems/Edit/5
+        // POST: Mains/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "MenuItemID,MenuItemTitle,MenuItemDescription,MenuitemNutrition,MenuItemIngredients,MenuItemQuantity,MenuItemCost")] MenuItem menuItem)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,Address,VenueName,ZipCode,City,State,Capacity,Price,CateringCompany,MenuItemTitle,MenuItemDescription,MenuItemQuantity,MenuItemCost,EnterDishes,SecurityName,SecurityPersonal,perSecurityPersonal,ApplicationUserId")] Main main)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(menuItem).State = EntityState.Modified;
+                db.Entry(main).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(menuItem);
+            ViewBag.ApplicationUserId = new SelectList(db.ApplicationUsers, "Id", "Email", main.ApplicationUserId);
+            return View(main);
         }
 
-        // GET: MenuItems/Delete/5
+        // GET: Mains/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MenuItem menuItem = db.MenuItems.Find(id);
-            if (menuItem == null)
+            Main main = db.Mains.Find(id);
+            if (main == null)
             {
                 return HttpNotFound();
             }
-            return View(menuItem);
+            return View(main);
         }
 
-        // POST: MenuItems/Delete/5
+        // POST: Mains/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            MenuItem menuItem = db.MenuItems.Find(id);
-            db.MenuItems.Remove(menuItem);
+            Main main = db.Mains.Find(id);
+            db.Mains.Remove(main);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

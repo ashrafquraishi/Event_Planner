@@ -1,20 +1,17 @@
-﻿using System;
+﻿using EventPlanner.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using EventPlanner.Models;
-using Microsoft.AspNet.Identity;
-using Stripe;
+
 namespace EventPlanner.Controllers
 {
     public class UserController : Controller
     {
-
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: User
@@ -29,22 +26,13 @@ namespace EventPlanner.Controllers
         }
         public ActionResult SearchZipcode()
         {
-            return View(db.EventLocationModels.ToList());
+            return View(db.Mains.ToList());
         }
-        public ActionResult  OrderFood()
-        {
-            return View(db.MenuItems.ToList());
-        }
-        //[HttpPost]
-        //public ActionResult OrderFood()
-        //{
-            
-        //}
         [HttpPost]
         public ActionResult SearchZipcode(string SearchResult)
 
         {
-            var ZipCodeSearch = from m in db.EventLocationModels
+            var ZipCodeSearch = from m in db.Mains
                                 select m;
             if (!string.IsNullOrEmpty(SearchResult))
             {
@@ -54,19 +42,12 @@ namespace EventPlanner.Controllers
             return View(ZipCodeSearch);
         }
 
-        // GET: User
-        public ActionResult Details(int Id)
+        // GET: User/Details/5
+        public ActionResult Details(int id)
         {
-            var ShowDetails = db.UserModels.Where(s => s.Id == Id).First();
-            return View(ShowDetails);
+            return View();
         }
-        [HttpPost]
-        public ActionResult Details(int Id, UserModel showdetails)
-        {
-            UserModel showdetails1 = db.UserModels.Where(s => s.Id == showdetails.Id).First();
-            return RedirectToAction("Index");
-        }
-        // GET: User/Create
+
         public ActionResult Create()
         {
             return View();
@@ -85,39 +66,10 @@ namespace EventPlanner.Controllers
                 userModel.ApplicationUserId = userId;
                 db.UserModels.Add(userModel);
                 db.SaveChanges();
-                return RedirectToAction("Details");
+                return RedirectToAction("Index");
             }
-
             return View(userModel);
-        }
-        public ActionResult Stripe()
-        {
-            var stripePublishKey = ConfigurationManager.AppSettings["stripePublishableKey"];
-            ViewBag.StripePublishKey = stripePublishKey;
-            return View();
-        }
-        public ActionResult Charge(string stripeEmail, string stripeToken)
-        {
-            var customers = new CustomerService();
-            var charges = new ChargeService();
 
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
-
-            var charge = charges.Create(new ChargeCreateOptions
-            {
-                Amount = 500,//charge in cents
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
-
-            // further application specific code goes here
-
-            return View();
         }
         // GET: User/Edit/5
         public ActionResult Edit(int? id)
@@ -150,6 +102,7 @@ namespace EventPlanner.Controllers
             return View(userModel);
         }
 
+
         // GET: User/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -175,15 +128,5 @@ namespace EventPlanner.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
     }
 }
